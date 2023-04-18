@@ -1,0 +1,55 @@
+---
+title: "Energy Output from PV System Model"
+author: "Kiera Matiska"
+date: "2023-04-18"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Write function
+
+This is a function used to compute energy produced from a photovoltaic system if the average annual solar radiation is known. This can be calculated with the following formula:
+
+E = A * r * H * PR
+
+where E is energy in kWh, A is solar panel area in m^2, r is panel yield, H is annual average solar radiation in kWh, and PR is performance ratio. The panel yield and performance ratio are numbers between 0 and 1, with the panel yield typically having a value of 0.2 and the performance ratio a value of 0.75.
+
+```{r}
+pv_energy <- function(pv_area, solar_radiation) { # energy and solar radiation: kWh; pv_area: m^2
+  
+  # define variables
+  panel_yield <- 0.2 # 0.2 is usual value, may be different (0-1); panel yield also known as r
+  performance_ratio <- 0.75 # usual value, may be different (0-1); also known as PR
+  
+  # calculating energy
+  energy <- pv_area * panel_yield * solar_radiation * performance_ratio
+  return(energy)
+}
+```
+
+# Test function
+
+```{r}
+# if pv_area is 36 m^2 and solar_radiation is 1460 kWh, then we should get a value of 7884 kWh returned
+pv_energy(36, 1460) # returned 7884
+
+# if pv_area is 48.5 m^2 and solar radiation is 1369.7 kWh, then we should get a value of 9964.57 kWh returned
+pv_energy(48.5, 1369.7) # returned 9964.57
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
